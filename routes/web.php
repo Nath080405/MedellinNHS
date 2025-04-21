@@ -5,7 +5,7 @@ use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('dashboard');
-}); 
+});
 
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
