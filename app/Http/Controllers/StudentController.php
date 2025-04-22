@@ -10,7 +10,7 @@ class StudentController extends Controller
     public function index()
     {
         // Assuming 'role' column in 'users' table defines if user is a student
-        $students = User::where('role', 'student')->get();
+        $students = User::where('role', 'student')->paginate(4);
 
         return view('students.index', compact('students'));
     }
@@ -46,6 +46,25 @@ class StudentController extends Controller
         return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
     }
 
+    public function edit($id)
+    {
+        $student = User::findOrFail($id);
+        return view('students.edit', compact('student'));
+    }
 
+    public function update(Request $request, $id)
+    {
+        $student = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required|string',
+        ]);
+
+        $student->update($validated);
+
+        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+    }
 }
 

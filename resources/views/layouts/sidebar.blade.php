@@ -10,7 +10,7 @@
     <ul class="nav flex-column mt-2">
         <!-- Dashboard -->
         <li class="nav-item">
-            <a class="nav-link d-flex align-items-center" href="#">
+            <a class="nav-link d-flex align-items-center" href="{{ route('admin.dashboard') }}">
                 <i class="bi bi-people-fill me-2"></i> Dashboard
             </a>
         </li>
@@ -43,9 +43,45 @@
     </ul>
 
     <!-- Bottom Icons -->
-    <div class="mt-auto p-3 border-top d-flex justify-content-around">
+    <div class="mt-auto p-3 border-top d-flex justify-content-around align-items-center">
         <i class="bi bi-bell"></i>
-        <img src="{{ asset('images/user.png') }}" class="rounded-circle" style="height: 32px;" alt="User">
+        <div class="dropdown">
+            <img src="{{ asset('images/user.png') }}" class="rounded-circle" style="height: 32px; cursor: pointer;" 
+                 alt="User" data-bs-toggle="dropdown" aria-expanded="false">
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item" href="#">
+                        <i class="bi bi-person me-2"></i>View Profile
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <x-logout-button class="dropdown-item text-danger" />
+                </li>
+            </ul>
+        </div>
         <i class="bi bi-search"></i>
     </div>
 </div>
+
+<style>
+.nav-link {
+    color: #000;
+}
+.nav-link:hover, .nav-link.active {
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+.dropdown-menu {
+    min-width: 200px;
+}
+.dropdown-item {
+    padding: 0.5rem 1rem;
+}
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+.dropdown-item i {
+    font-size: 1.1rem;
+}
+</style>

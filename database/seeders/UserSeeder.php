@@ -13,17 +13,17 @@ class UserSeeder extends Seeder
         // Example student user
         User::create([
             'name' => 'John Doe',
-            'email' => 'student1@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'student',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('admin'),
+            'role' => 'admin',
         ]);
-
+        
         // Add more if you want
         User::create([
             'name' => 'Jane Smith',
-            'email' => 'student2@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'student',
+            'email' => 'admin2@example.com',
+            'password' => Hash::make('admin2'),
+            'role' => 'admin',
         ]);
     }
 }
