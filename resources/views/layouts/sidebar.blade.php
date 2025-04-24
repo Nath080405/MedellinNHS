@@ -45,6 +45,7 @@
     <!-- Bottom Icons -->
     <div class="mt-auto p-3 border-top d-flex justify-content-around align-items-center">
         <i class="bi bi-bell"></i>
+
         <div class="dropdown">
             <img src="{{ asset('images/user.png') }}" class="rounded-circle" style="height: 32px; cursor: pointer;" 
                  alt="User" data-bs-toggle="dropdown" aria-expanded="false">

@@ -47,3 +47,85 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
     Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
 });
+
+//Teachers
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('teachers/index', function () {
+    return view('teachers.index');
+})->name('teachers.index');
+
+Route::get('teachers/grades', function () {
+    return view('teachers.grades');
+})->name('teachers.grades');
+
+Route::get('teachers/subjects', function () {
+    return view('teachers.subjects');
+})->name('teachers.subjects');
+
+Route::get('teachers/events', function () {
+    return view('teachers.events');
+})->name('teachers.events');
+
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+
+
+
+use App\Http\Controllers\StudentGradeController;
+Route::get('/teachers/student-grades/{id}', [StudentGradeController::class, 'show'])->name('teachers.student-grades.show');
+
+Route::get('teachers/subjects', function () {
+    return view('teachers.subjects');
+})->name('teachers.subjects');
+
+Route::get('teachers/grades', function () {
+    return view('teachers.grades');
+})->name('teachers.grades');
+
+Route::get('teachers/addSubjects', function () {
+    return view('teachers.addSubjects');
+})->name('teachers.addSubjects');
+//grades
+Route::get('/grades/add', [AddGradesController::class, 'index'])->name('grades.add');
+
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\SearchController;
+
+Route::get('/form', [FormController::class, 'show']);
+Route::post('/submit-form', [FormController::class, 'submit'])->name('form.submit');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('students.edit');
+Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
+Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+
+//connect
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::get('/profile', function () {
+    return view('students'); // change if needed
+});
+
+Route::get('/settings', function () {
+    return view('settings');
+});
+
+Route::get('/grades', function () {
+    return view('grades');
+});
+
+Route::get('/events', function () {
+    return view('events');
+});
+
+use App\Models\Student;
+use App\Models\Grade;
+
+
