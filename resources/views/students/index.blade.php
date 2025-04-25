@@ -33,14 +33,14 @@
         <!-- Stats Cards -->
         <div class="row mb-4 g-3">
             <div class="col-md-3">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card shadow-lg border-0 h-100">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">Total Students</h6>
                                 <h3 class="mb-0 fw-bold">{{ $students->total() }}</h3>
                             </div>
-                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle">
+                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-people-fill text-primary"></i>
                             </div>
                         </div>
@@ -48,14 +48,14 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card shadow-lg border-0 h-100">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">Active Students</h6>
                                 <h3 class="mb-0 fw-bold">{{ $students->total() }}</h3>
                             </div>
-                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle">
+                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-check-circle-fill text-success"></i>
                             </div>
                         </div>
@@ -63,14 +63,14 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card shadow-lg border-0 h-100">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">New This Month</h6>
                                 <h3 class="mb-0 fw-bold">0</h3>
                             </div>
-                            <div class="avatar-sm bg-info bg-opacity-10 rounded-circle">
+                            <div class="avatar-sm bg-info bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-calendar-check-fill text-info"></i>
                             </div>
                         </div>
@@ -78,14 +78,14 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card shadow-sm border-0 h-100">
+                <div class="card shadow-lg border-0 h-100">
                     <div class="card-body p-3">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">Average Age</h6>
                                 <h3 class="mb-0 fw-bold">18</h3>
                             </div>
-                            <div class="avatar-sm bg-warning bg-opacity-10 rounded-circle">
+                            <div class="avatar-sm bg-warning bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-graph-up text-warning"></i>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-lg border-0">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -112,14 +112,14 @@
                         </thead>
                         <tbody>
                             @forelse($students as $student)
-                                <tr>
+                                <tr class="shadow-sm">
                                     <td class="ps-3 py-3">
                                         <span
-                                            class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 fw-medium">#{{ $student->id }}</span>
+                                            class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 fw-medium shadow-sm">#{{ $student->id }}</span>
                                     </td>
                                     <td class="py-3">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm me-2 shadow-sm">
+                                            <div class="avatar-sm me-2 shadow">
                                                 <span class="avatar-title bg-primary bg-opacity-10 text-primary">
                                                     <i class="bi bi-person"></i>
                                                 </span>
@@ -134,7 +134,7 @@
                                         </div>
                                     </td>
                                     <td class="py-3">
-                                        <span class="badge bg-info bg-opacity-10 text-info px-2 py-1 fw-medium">
+                                        <span class="badge bg-info bg-opacity-10 text-info px-2 py-1 fw-medium shadow-sm">
                                             <i class="bi bi-mortarboard me-1"></i>
                                             {{ $student->grade ?? 'Not Assigned' }}
                                         </span>
@@ -149,28 +149,29 @@
                                     </td>
                                     <td class="py-3">
                                         <span
-                                            class="badge bg-primary bg-opacity-10 text-primary text-capitalize px-2 py-1 fw-medium">
+                                            class="badge bg-primary bg-opacity-10 text-primary text-capitalize px-2 py-1 fw-medium shadow-sm">
                                             <i class="bi bi-person me-1"></i>
                                             {{ $student->role }}
                                         </span>
                                     </td>
                                     <td class="py-3">
-                                        <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 fw-medium">
+                                        <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 fw-medium shadow-sm">
                                             <i class="bi bi-check-circle me-1"></i> Active
                                         </span>
                                     </td>
 
                                     <td class="text-end pe-3 py-3">
-                                        <div class="btn-group shadow-sm" role="group">
+                                        <div class="btn-group shadow" role="group">
                                             <a href="{{ route('students.edit', $student->id) }}"
                                                 class="btn btn-sm btn-outline-primary px-2" data-bs-toggle="tooltip"
                                                 data-bs-placement="top" title="Edit Student">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <button type="button" class="btn btn-sm btn-outline-info px-2"
+                                            <a href="{{ route('students.show', $student->id) }}"
+                                                class="btn btn-sm btn-outline-info px-2"
                                                 data-bs-toggle="tooltip" data-bs-placement="top" title="View Details">
                                                 <i class="bi bi-eye"></i>
-                                            </button>
+                                            </a>
                                             <form action="{{ route('students.destroy', $student->id) }}" method="POST"
                                                 onsubmit="return confirm('Are you sure you want to delete this student?')"
                                                 style="display: inline-block;">
@@ -253,6 +254,7 @@
 
         .card {
             border-radius: 0.5rem;
+            overflow: hidden;
         }
 
         .shadow-sm {
@@ -262,6 +264,7 @@
         .badge {
             font-weight: 500;
             letter-spacing: 0.3px;
+            border-radius: 0.375rem;
         }
 
         .btn-group {
@@ -282,6 +285,38 @@
             border-bottom-right-radius: 0.375rem;
         }
 
+        /* Table Styles with Rounded Edges */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table thead th:first-child {
+            border-top-left-radius: 0.5rem;
+        }
+
+        .table thead th:last-child {
+            border-top-right-radius: 0.5rem;
+        }
+
+        .table tbody tr:last-child td:first-child {
+            border-bottom-left-radius: 0.5rem;
+        }
+
+        .table tbody tr:last-child td:last-child {
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .table thead th {
+            background-color: #f8f9fa;
+            border: none;
+        }
+
+        .table tbody td {
+            border: none;
+        }
+
+        /* Simple Hover Effect */
         .table-hover tbody tr:hover {
             background-color: rgba(13, 110, 253, 0.05);
         }
@@ -349,14 +384,6 @@
 
         .card:hover {
             transform: translateY(-2px);
-        }
-
-        .table-hover tbody tr {
-            transition: all 0.2s ease;
-        }
-
-        .table-hover tbody tr:hover {
-            transform: translateX(2px);
         }
     </style>
 
