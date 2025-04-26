@@ -4,14 +4,14 @@
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">Add New Student</h2>
-            <a href="{{ route('students.index') }}" class="btn btn-outline-secondary">
+            <a href="{{ route('admin.students.index') }}" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left me-1"></i> Back to Students
             </a>
         </div>
 
         <div class="card shadow-sm">
             <div class="card-body">
-                <form method="POST" action="{{ route('students.store') }}">
+                <form method="POST" action="{{ route('admin.students.store') }}">
                     @csrf
 
                     <div class="row">
@@ -81,26 +81,6 @@
                                     <option value="Grade 7 - Section A" class="grade-7" {{ old('section') == 'Grade 7 - Section A' ? 'selected' : '' }}>Section A</option>
                                     <option value="Grade 7 - Section B" class="grade-7" {{ old('section') == 'Grade 7 - Section B' ? 'selected' : '' }}>Section B</option>
                                     <option value="Grade 7 - Section C" class="grade-7" {{ old('section') == 'Grade 7 - Section C' ? 'selected' : '' }}>Section C</option>
-                                    <!-- Grade 8 Sections -->
-                                    <option value="Grade 8 - Section A" class="grade-8" {{ old('section') == 'Grade 8 - Section A' ? 'selected' : '' }}>Section A</option>
-                                    <option value="Grade 8 - Section B" class="grade-8" {{ old('section') == 'Grade 8 - Section B' ? 'selected' : '' }}>Section B</option>
-                                    <option value="Grade 8 - Section C" class="grade-8" {{ old('section') == 'Grade 8 - Section C' ? 'selected' : '' }}>Section C</option>
-                                    <!-- Grade 9 Sections -->
-                                    <option value="Grade 9 - Section A" class="grade-9" {{ old('section') == 'Grade 9 - Section A' ? 'selected' : '' }}>Section A</option>
-                                    <option value="Grade 9 - Section B" class="grade-9" {{ old('section') == 'Grade 9 - Section B' ? 'selected' : '' }}>Section B</option>
-                                    <option value="Grade 9 - Section C" class="grade-9" {{ old('section') == 'Grade 9 - Section C' ? 'selected' : '' }}>Section C</option>
-                                    <!-- Grade 10 Sections -->
-                                    <option value="Grade 10 - Section A" class="grade-10" {{ old('section') == 'Grade 10 - Section A' ? 'selected' : '' }}>Section A</option>
-                                    <option value="Grade 10 - Section B" class="grade-10" {{ old('section') == 'Grade 10 - Section B' ? 'selected' : '' }}>Section B</option>
-                                    <option value="Grade 10 - Section C" class="grade-10" {{ old('section') == 'Grade 10 - Section C' ? 'selected' : '' }}>Section C</option>
-                                    <!-- Grade 11 Sections -->
-                                    <option value="Grade 11 - Section A" class="grade-11" {{ old('section') == 'Grade 11 - Section A' ? 'selected' : '' }}>Section A</option>
-                                    <option value="Grade 11 - Section B" class="grade-11" {{ old('section') == 'Grade 11 - Section B' ? 'selected' : '' }}>Section B</option>
-                                    <option value="Grade 11 - Section C" class="grade-11" {{ old('section') == 'Grade 11 - Section C' ? 'selected' : '' }}>Section C</option>
-                                    <!-- Grade 12 Sections -->
-                                    <option value="Grade 12 - Section A" class="grade-12" {{ old('section') == 'Grade 12 - Section A' ? 'selected' : '' }}>Section A</option>
-                                    <option value="Grade 12 - Section B" class="grade-12" {{ old('section') == 'Grade 12 - Section B' ? 'selected' : '' }}>Section B</option>
-                                    <option value="Grade 12 - Section C" class="grade-12" {{ old('section') == 'Grade 12 - Section C' ? 'selected' : '' }}>Section C</option>
                                 </select>
                             </div>
 
@@ -140,7 +120,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end gap-2 mt-4">
-                        <a href="{{ route('students.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                        <a href="{{ route('admin.students.index') }}" class="btn btn-outline-secondary">Cancel</a>
                         <button type="submit" class="btn btn-success">
                             <i class="bi bi-check-circle me-1"></i> Save Student
                         </button>

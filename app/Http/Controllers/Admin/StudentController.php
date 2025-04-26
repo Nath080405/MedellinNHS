@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -65,7 +66,7 @@ class StudentController extends Controller
         $student->status = 'active';
         $student->save();
 
-        return redirect()->route('students.index')->with('success', 'Student added successfully! Student ID: ' . $studentId);
+        return redirect()->route('admin.students.index')->with('success', 'Student added successfully! Student ID: ' . $studentId);
     }
 
     public function destroy($id)
@@ -81,10 +82,10 @@ class StudentController extends Controller
             // Then delete the user record
             $user->delete();
 
-            return redirect()->route('students.index')
+            return redirect()->route('admin.students.index')
                 ->with('success', 'Student deleted successfully');
         } catch (\Exception $e) {
-            return redirect()->route('students.index')
+            return redirect()->route('admin.students.index')
                 ->with('error', 'Failed to delete student. Please try again.');
         }
     }
@@ -121,7 +122,7 @@ class StudentController extends Controller
         $user->role = $validated['role'];
         $user->save();
 
-        // Update student record if it exists
+        // Update or create student record
         if ($user->student) {
             $student = $user->student;
             $student->grade = $validated['grade'] ?? $student->grade;
@@ -153,7 +154,7 @@ class StudentController extends Controller
             $student->save();
         }
 
-        return redirect()->route('students.index')->with('success', 'Student updated successfully!');
+        return redirect()->route('admin.students.index')->with('success', 'Student updated successfully!');
     }
 
     public function show($id)

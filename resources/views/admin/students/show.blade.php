@@ -5,10 +5,10 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">Student Details</h2>
             <div class="d-flex gap-2">
-                <a href="{{ route('students.index') }}" class="btn btn-outline-secondary">
+                <a href="{{ route('admin.students.index') }}" class="btn btn-outline-secondary">
                     <i class="bi bi-arrow-left me-1"></i> Back to Students
                 </a>
-                <a href="{{ route('students.edit', $student->id) }}" class="btn btn-primary">
+                <a href="{{ route('admin.students.edit', $student->id) }}" class="btn btn-primary">
                     <i class="bi bi-pencil me-1"></i> Edit Student
                 </a>
             </div>

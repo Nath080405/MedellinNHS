@@ -91,7 +91,7 @@
                         @endforeach
 
                         @if(empty($quickActions))
-                            <a href="{{ route('students.create') }}" class="btn btn-primary shadow-sm">
+                            <a href="{{ route('admin.students.create') }}" class="btn btn-primary shadow-sm">
                                 <i class="bi bi-person-plus me-2"></i>Add New Student
                             </a>
                             <a href="#" class="btn btn-outline-primary shadow-sm">

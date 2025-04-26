@@ -23,22 +23,16 @@
                 <i class="bi bi-chevron-down small"></i>
             </a>
             <div class="collapse ps-4" id="usersSubmenu">
-                <a href="{{ route('students.index') }}" class="nav-link py-2">Students</a>
-                <a href="#" class="nav-link py-2">Teachers</a>
+                <a href="{{ route('admin.students.index') }}" class="nav-link py-2">Students</a>
+                <a href="{{ route('admin.teachers.index') }}" class="nav-link py-2">Teachers</a>
             </div>
         </li>
 
         <!-- Subjects -->
         <li class="nav-item mb-2">
-            <a class="nav-link d-flex justify-content-between align-items-center rounded" data-bs-toggle="collapse"
-                href="#subjectsSubmenu" role="button">
-                <span><i class="bi bi-book-fill me-2"></i> Subjects</span>
-                <i class="bi bi-chevron-down small"></i>
+            <a class="nav-link d-flex align-items-center rounded" href="{{ route('admin.subjects.index') }}">
+                <i class="bi bi-book-fill me-2"></i> Subjects
             </a>
-            <div class="collapse ps-4" id="subjectsSubmenu">
-                <a href="#" class="nav-link py-2">Subject 1</a>
-                <a href="#" class="nav-link py-2">Subject 2</a>
-            </div>
         </li>
     </ul>
 
