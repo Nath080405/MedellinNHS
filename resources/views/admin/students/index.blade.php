@@ -38,7 +38,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">Total Students</h6>
-                                <h3 class="mb-0 fw-bold">{{ $students->total() }}</h3>
+                                <h3 class="mb-0 fw-bold">{{ $students->count() }}</h3>
                             </div>
                             <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-people-fill text-primary"></i>
@@ -53,7 +53,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h6 class="text-muted mb-1 small text-uppercase fw-semibold">Active Students</h6>
-                                <h3 class="mb-0 fw-bold">{{ $students->total() }}</h3>
+                                <h3 class="mb-0 fw-bold">{{ $students->where('student.status', 'active')->count() }}</h3>
                             </div>
                             <div class="avatar-sm bg-success bg-opacity-10 rounded-circle shadow">
                                 <i class="bi bi-check-circle-fill text-success"></i>
@@ -105,7 +105,7 @@
                                 <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Student Information</th>
                                 <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Class/Grade</th>
                                 <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Contact</th>
-                                <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Role</th>
+                                <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Guardian</th>
                                 <th scope="col" class="border-0 py-3 text-uppercase small fw-semibold">Status</th>
                                 <th scope="col" class="border-0 text-end pe-3 py-3 text-uppercase small fw-semibold">Actions</th>
                             </tr>
@@ -115,7 +115,7 @@
                                 <tr class="shadow-sm">
                                     <td class="ps-3 py-3">
                                         <span
-                                            class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 fw-medium shadow-sm">#{{ $student->id }}</span>
+                                            class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 fw-medium shadow-sm">{{ $student->student?->student_id ?? 'N/A' }}</span>
                                     </td>
                                     <td class="py-3">
                                         <div class="d-flex align-items-center">
@@ -136,7 +136,7 @@
                                     <td class="py-3">
                                         <span class="badge bg-info bg-opacity-10 text-info px-2 py-1 fw-medium shadow-sm">
                                             <i class="bi bi-mortarboard me-1"></i>
-                                            {{ $student->grade ?? 'Not Assigned' }}
+                                            {{ $student->student?->grade ?? 'N/A' }}
                                         </span>
                                     </td>
                                     <td class="py-3">
@@ -148,18 +148,22 @@
                                         </div>
                                     </td>
                                     <td class="py-3">
-                                        <span
-                                            class="badge bg-primary bg-opacity-10 text-primary text-capitalize px-2 py-1 fw-medium shadow-sm">
-                                            <i class="bi bi-person me-1"></i>
-                                            {{ $student->role }}
-                                        </span>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-person-fill text-muted me-2"></i>
+                                            <div>
+                                                <h6 class="mb-1 fw-medium">{{ $student->student?->guardian_name ?? 'N/A' }}</h6>
+                                                <small class="text-muted">
+                                                    <i class="bi bi-phone me-1"></i>
+                                                    {{ $student->student?->guardian_phone ?? 'N/A' }}
+                                                </small>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td class="py-3">
-                                        <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 fw-medium shadow-sm">
-                                            <i class="bi bi-check-circle me-1"></i> Active
+                                        <span class="badge bg-{{ $student->student?->status === 'active' ? 'success' : 'danger' }} text-capitalize px-2 py-1 fw-medium shadow-sm">
+                                            {{ ucfirst($student->student?->status ?? 'inactive') }}
                                         </span>
                                     </td>
-
                                     <td class="text-end pe-3 py-3">
                                         <div class="btn-group shadow" role="group">
                                             <a href="{{ route('students.edit', $student->id) }}"

@@ -24,6 +24,11 @@ Route::middleware(['auth'])->group(function () {
     //         return view('teacher.dashboard');
     //     })->name('teacher.dashboard');
     // });
+    Route::middleware(['role:teacher'])->prefix('teacher')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('teachers.dashboard');
+        })->name('teacher.dashboard');
+    });
 
     // // Student Routes
     // Route::middleware(['role:student'])->prefix('student')->group(function () {

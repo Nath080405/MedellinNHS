@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
         // Example student user
         User::create([
-            'name' => 'John Doe',
+            'name' => 'Mae Matanog',
             'email' => 'admin@example.com',
             'password' => Hash::make('admin'),
             'role' => 'admin',
@@ -20,10 +20,17 @@ class UserSeeder extends Seeder
         
         // Add more if you want
         User::create([
-            'name' => 'Jane Smith',
-            'email' => 'admin2@example.com',
-            'password' => Hash::make('admin2'),
-            'role' => 'admin',
+            'name' => 'Nathaniel R. Kiskisan',
+            'email' => 'teacher@example.com',
+            'password' => Hash::make('teacher'),
+            'role' => 'teacher',
+        ]);
+
+        User::create([
+            'name' => 'Leslie Lumapac',
+            'email' => 'student@example.com',
+            'password' => Hash::make('student'),
+            'role' => 'student',
         ]);
     }
 }
