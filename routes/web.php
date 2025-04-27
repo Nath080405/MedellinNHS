@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\ProfileController;
 
 // Authentication Routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -18,6 +19,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('admin.dashboard');
+
+        // Profile Routes
+        Route::get('/profile', [ProfileController::class, 'show'])->name('admin.profile');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
 
         // Subject Management Routes
         Route::get('/subjects', [SubjectController::class, 'index'])->name('admin.subjects.index');
@@ -47,12 +52,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/students/{id}', [StudentController::class, 'show'])->name('admin.students.show');
     });
 
-    //     // Teacher Routes
-//     Route::middleware(['role:teacher'])->prefix('teacher')->group(function () {
-//         Route::get('/dashboard', function () {
-//             return view('teachers.dashboard');
-//         })->name('teacher.dashboard');
-//     });
+        // Teacher Routes
+    Route::middleware(['role:teacher'])->prefix('teacher')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('teachers.dashboard');
+        })->name('teacher.dashboard');
+    });
 
     //     // Student Routes
 //     Route::middleware(['role:student'])->prefix('student')->group(function () {

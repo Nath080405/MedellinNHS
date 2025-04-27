@@ -34,44 +34,39 @@
                 <i class="bi bi-book-fill me-2"></i> Subjects
             </a>
         </li>
+
+        <!-- Profile -->
+        <li class="nav-item mb-2">
+            <a class="nav-link d-flex align-items-center rounded" href="{{ route('admin.profile') }}">
+                <i class="bi bi-person-fill me-2"></i> My Profile
+            </a>
+        </li>
     </ul>
 
-    <!-- Bottom Icons -->
-    <div class="mt-auto p-3 border-top d-flex justify-content-around align-items-center">
-        <div class="position-relative">
-            <i class="bi bi-bell fs-5"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                3
-            </span>
+    <!-- Bottom User Info and Logout -->
+    <div class="mt-auto p-3 border-top">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="{{ route('admin.profile') }}" class="d-flex align-items-center text-decoration-none text-dark">
+                <img src="{{ Auth::user()->profile_image ? asset('storage/' . Auth::user()->profile_image) : asset('images/user.png') }}" 
+                     class="rounded-circle me-2" style="height: 32px; width: 32px; object-fit: cover;" alt="User">
+                <div>
+                    <div class="fw-bold">{{ Auth::user()->name }}</div>
+                    <small class="text-muted">{{ ucfirst(Auth::user()->role) }}</small>
+                </div>
+            </a>
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-link text-danger p-0">
+                    <i class="bi bi-box-arrow-right fs-5"></i>
+                </button>
+            </form>
         </div>
-        <div class="dropdown">
-            <img src="{{ asset('images/user.png') }}" class="rounded-circle" style="height: 32px; cursor: pointer;" 
-                 alt="User" data-bs-toggle="dropdown" aria-expanded="false">
-            <ul class="dropdown-menu dropdown-menu-end shadow-sm">
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-person me-2"></i>View Profile
-                    </a>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                    <x-logout-button class="dropdown-item text-danger" />
-                </li>
-            </ul>
-        </div>
-        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-            @csrf
-            <button type="submit" class="btn btn-link text-danger p-0">
-                <i class="bi bi-box-arrow-right fs-5"></i>
-            </button>
-        </form>
     </div>
 </div>
 
 <style>
 .nav-link {
     color: #495057;
-    transition: all 0.2s ease;
     padding: 0.5rem 1rem;
 }
 .nav-link:hover, .nav-link.active {
@@ -86,7 +81,6 @@
 }
 .dropdown-item {
     padding: 0.5rem 1rem;
-    transition: all 0.2s ease;
 }
 .dropdown-item:hover {
     background-color: #f8f9fa;

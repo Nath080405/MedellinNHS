@@ -8,12 +8,47 @@ use App\Models\User;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Assuming 'role' column in 'users' table defines if user is a student
-        $students = User::where('role', 'student')->with('student')->paginate(4);
+        $query = User::where('role', 'student')
+            ->with('student');
 
-        return view('admin.students.index', compact('students'));
+        // Apply filters
+        if ($request->filled('grade')) {
+            $query->whereHas('student', function ($q) use ($request) {
+                $q->where('grade', $request->grade);
+            });
+        }
+
+        if ($request->filled('status')) {
+            $query->whereHas('student', function ($q) use ($request) {
+                $q->where('status', $request->status);
+            });
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('email', 'like', "%{$search}%")
+                  ->orWhereHas('student', function($q) use ($search) {
+                      $q->where('student_id', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        $students = $query->paginate(4)->withQueryString();
+
+        // Get unique grades for filter dropdown
+        $grades = User::where('role', 'student')
+            ->whereHas('student', function ($q) {
+                $q->whereNotNull('grade');
+            })
+            ->join('students', 'users.id', '=', 'students.user_id')
+            ->distinct()
+            ->pluck('students.grade');
+
+        return view('admin.students.index', compact('students', 'grades'));
     }
 
     public function create()
@@ -103,7 +138,7 @@ class StudentController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required|string',
+            'password' => 'nullable|string|min:6|confirmed',
             'grade' => 'nullable|string',
             'section' => 'nullable|string',
             'phone' => 'nullable|string|max:20',
@@ -117,41 +152,47 @@ class StudentController extends Controller
         ]);
 
         // Update user record
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->role = $validated['role'];
-        $user->save();
+        $userData = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ];
+
+        // Only update password if provided
+        if (!empty($validated['password'])) {
+            $userData['password'] = bcrypt($validated['password']);
+        }
+
+        $user->update($userData);
 
         // Update or create student record
         if ($user->student) {
-            $student = $user->student;
-            $student->grade = $validated['grade'] ?? $student->grade;
-            $student->section = $validated['section'] ?? $student->section;
-            $student->phone = $validated['phone'] ?? $student->phone;
-            $student->address = $validated['address'] ?? $student->address;
-            $student->birthdate = $validated['birthdate'] ?? $student->birthdate;
-            $student->gender = $validated['gender'] ?? $student->gender;
-            $student->guardian_name = $validated['guardian_name'] ?? $student->guardian_name;
-            $student->guardian_phone = $validated['guardian_phone'] ?? $student->guardian_phone;
-            $student->guardian_email = $validated['guardian_email'] ?? $student->guardian_email;
-            $student->status = $validated['status'] ?? $student->status;
-            $student->save();
+            $user->student()->update([
+                'grade' => $validated['grade'],
+                'section' => $validated['section'],
+                'phone' => $validated['phone'],
+                'address' => $validated['address'],
+                'birthdate' => $validated['birthdate'],
+                'gender' => $validated['gender'],
+                'guardian_name' => $validated['guardian_name'],
+                'guardian_phone' => $validated['guardian_phone'],
+                'guardian_email' => $validated['guardian_email'],
+                'status' => $validated['status'] ?? 'active',
+            ]);
         } else {
             // Create student record if it doesn't exist
-            $student = new \App\Models\Student();
-            $student->user_id = $user->id;
-            $student->grade = $validated['grade'] ?? null;
-            $student->section = $validated['section'] ?? null;
-            $student->student_id = 'STU' . str_pad($user->id, 5, '0', STR_PAD_LEFT);
-            $student->phone = $validated['phone'] ?? null;
-            $student->address = $validated['address'] ?? null;
-            $student->birthdate = $validated['birthdate'] ?? null;
-            $student->gender = $validated['gender'] ?? null;
-            $student->guardian_name = $validated['guardian_name'] ?? null;
-            $student->guardian_phone = $validated['guardian_phone'] ?? null;
-            $student->guardian_email = $validated['guardian_email'] ?? null;
-            $student->status = $validated['status'] ?? 'active';
-            $student->save();
+            $user->student()->create([
+                'grade' => $validated['grade'],
+                'section' => $validated['section'],
+                'student_id' => 'STU' . str_pad($user->id, 5, '0', STR_PAD_LEFT),
+                'phone' => $validated['phone'],
+                'address' => $validated['address'],
+                'birthdate' => $validated['birthdate'],
+                'gender' => $validated['gender'],
+                'guardian_name' => $validated['guardian_name'],
+                'guardian_phone' => $validated['guardian_phone'],
+                'guardian_email' => $validated['guardian_email'],
+                'status' => $validated['status'] ?? 'active',
+            ]);
         }
 
         return redirect()->route('admin.students.index')->with('success', 'Student updated successfully!');

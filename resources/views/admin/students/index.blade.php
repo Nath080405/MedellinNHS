@@ -8,13 +8,29 @@
                 <h2 class="fw-bold mb-1 text-primary">Student Management</h2>
                 <p class="text-muted mb-0 small">Manage and monitor student records and information</p>
             </div>
-            <div class="d-flex gap-2">
-                <div class="input-group shadow-sm" style="width: 250px;">
-                    <span class="input-group-text bg-white border-end-0">
-                        <i class="bi bi-search text-muted"></i>
-                    </span>
-                    <input type="text" class="form-control border-start-0" placeholder="Search by name, email, or ID...">
-                </div>
+            <div class="d-flex gap-3 align-items-center">
+                <form action="{{ route('admin.students.index') }}" method="GET" class="search-form mb-0">
+                    <div class="search-wrapper">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="bi bi-search text-muted"></i>
+                            </span>
+                            <input type="text" 
+                                   name="search" 
+                                   class="form-control border-start-0" 
+                                   placeholder="Search students..." 
+                                   value="{{ request('search') }}"
+                                   autocomplete="off">
+                            @if(request()->has('search'))
+                                <a href="{{ route('admin.students.index') }}" 
+                                   class="btn btn-link text-muted px-2" 
+                                   title="Clear search">
+                                    <i class="bi bi-x-lg"></i>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
                 <a href="{{ route('admin.students.create') }}" class="btn btn-primary shadow-sm">
                     <i class="bi bi-plus-circle me-1"></i> Add New Student
                 </a>
@@ -265,6 +281,10 @@
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
         }
 
+        .shadow-lg {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
         .badge {
             font-weight: 500;
             letter-spacing: 0.3px;
@@ -379,6 +399,48 @@
 
         .text-muted {
             font-size: 0.8125rem;
+        }
+
+        /* Search Styles */
+        .search-form {
+            max-width: 250px;
+            margin: 0;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-wrapper .input-group {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .search-wrapper .input-group-text {
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+        }
+
+        .search-wrapper .form-control {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+            height: 38px;
+        }
+
+        .search-wrapper .form-control:focus {
+            box-shadow: none;
+        }
+
+        .search-wrapper .btn-link {
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+        }
+
+        .search-wrapper .btn-link:hover {
+            color: #dc3545 !important;
         }
     </style>
 

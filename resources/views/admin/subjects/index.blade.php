@@ -242,10 +242,7 @@
         }
         .card {
             border-radius: 0.5rem;
-            transition: all 0.2s ease;
-        }
-        .card:hover {
-            transform: translateY(-2px);
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
         }
         .shadow-sm {
             box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
@@ -253,13 +250,15 @@
         .shadow-lg {
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
         }
-        .table th {
-            font-weight: 600;
-            font-size: 0.85rem;
+        .table > :not(caption) > * > * {
+            padding: 1rem 0.75rem;
+        }
+        .btn-group .btn {
+            padding: 0.25rem 0.5rem;
         }
         .badge {
+            padding: 0.5em 0.75em;
             font-weight: 500;
-            padding: 0.35em 0.65em;
         }
     </style>
 @endsection 
