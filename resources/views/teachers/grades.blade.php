@@ -1,14 +1,14 @@
 @extends('layouts.teacherApp')
 
 @section('content')
-<div style="background-color:rgb(242, 240, 241); min-height: 100vh;">
+<div style="background-color: rgb(242, 240, 241); min-height: 100vh; padding-top: 30px;">
   <div class="col-md-9 col-lg-10 mx-auto p-4">
-    
+
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-5">
-      <div class="me-auto">
+      <div>
         <p class="mb-1 text-muted" style="font-size: 0.9rem;">Overview</p>
-        <h3 class="mb-0 fw-bold text-dark">Student grades</h3>
+        <h3 class="fw-bold text-dark m-0">Student Grades</h3>
       </div>
 
       <!-- Search Bar -->
@@ -18,90 +18,75 @@
       </form>
     </div>
 
-    <!-- Main Content Container -->
-    <div class="container-fluid bg-white rounded shadow-sm py-4 px-3">
-      
+    <!-- Main Content -->
+    <div class="container-fluid bg-white rounded shadow-sm d-flex flex-column py-4 px-3" style="min-height: calc(100vh - 180px);">
+
       <!-- Top Action Buttons -->
       <div class="d-flex justify-content-end mb-4">
         <a href="#" class="btn btn-outline-secondary me-2">Print</a>
         <a href="#" class="btn btn-outline-secondary">Export</a>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="d-flex flex-wrap gap-3 mb-4">
-        
-        <!-- Grade Level Dropdown -->
-  <div class="btn-group flex-fill">
-  <button class="btn btn-secondary w-100" type="button">
-    Grade Level
-  </button>
-  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    @foreach($gradeLevels as $grade)
-      <li><a class="dropdown-item" href="#">{{ $grade }}</a></li>
-    @endforeach
-  </ul>
-</div>
-
-
-
-        <!-- Section Dropdown -->
-        <div class="btn-group flex-fill">
-  <button class="btn btn-secondary w-100" type="button">
-    Section
-  </button>
-  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Section A</a></li>
-    <li><a class="dropdown-item" href="#">Section B</a></li>
-    <li><a class="dropdown-item" href="#">Section C</a></li>
-    <li><a class="dropdown-item" href="#">Section D</a></li>
-  </ul>
-</div>
-
-        <!-- Subject Dropdown -->
-        <div class="btn-group flex-fill">
-  <button class="btn btn-secondary w-100" type="button">
-    Subjects
-  </button>
-  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Filipino</a></li>
-    <li><a class="dropdown-item" href="#">English</a></li>
-    <li><a class="dropdown-item" href="#">Math</a></li>
-    <li><a class="dropdown-item" href="#">Science</a></li>
-  </ul>
-</div>
-
-        <!-- Quarter Dropdown -->
-        <div class="btn-group flex-fill">
-  <button class="btn btn-secondary w-100" type="button">
-    Quarter
-  </button>
-  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="visually-hidden">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">1st Quarter</a></li>
-    <li><a class="dropdown-item" href="#">2nd Quarter</a></li>
-    <li><a class="dropdown-item" href="#">3rd Quarter</a></li>
-    <li><a class="dropdown-item" href="#">4th Quarter</a></li>
-  </ul>
-</div>
-
+      <!-- Filters Table -->
+      <div class="table-responsive mb-4">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-light">
+            <tr>
+              <th>Grade Level</th>
+              <th>Section</th>
+              <th>Subjects</th>
+              <th>Quarter</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select class="form-select">
+                  <option>Grade 7</option>
+                  <option>Grade 8</option>
+                  <option>Grade 9</option>
+                  <option>Grade 10</option>
+                  <option>Grade 11</option>
+                  <option>Grade 12</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-select">
+                  <option>Section A</option>
+                  <option>Section B</option>
+                  <option>Section C</option>
+                  <option>Section D</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-select">
+                  <option>Filipino</option>
+                  <option>English</option>
+                  <option>Math</option>
+                  <option>Science</option>
+                </select>
+              </td>
+              <td>
+                <select class="form-select">
+                  <option>1st Quarter</option>
+                  <option>2nd Quarter</option>
+                  <option>3rd Quarter</option>
+                  <option>4th Quarter</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- End Filters Table -->
+      
       <!-- Bottom Action Buttons -->
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end pt-4 mt-auto">
         <a href="#" class="btn btn-light me-2">Save Drafts</a>
         <a href="#" class="btn btn-dark">Post Grades</a>
       </div>
 
-    </div>
-  </div>
-</div>
+    </div> <!-- End Main Container -->
+
+  </div> <!-- End inner content -->
+</div> <!-- End background -->
 @endsection
