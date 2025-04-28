@@ -1,4 +1,3 @@
-
 @extends('layouts.login')
 
 @section('content')
@@ -10,7 +9,7 @@
                     <!-- Logo -->
                     <div class="text-center mb-3">
                         <img src="{{ asset('MedellinLogo.png') }}" alt="Logo" class="img-fluid mb-2" style="height: 60px;">
-                        <h2 class="fw-bold text-primary mb-1" style="font-size: 1.5rem;">Welcome Back</h2>
+                        <h2 class="fw-bold text-primary mb-1" style="font-size: 1.5rem;">Sign In</h2>
                         <p class="text-muted small">Please sign in to your account</p>
                     </div>
 

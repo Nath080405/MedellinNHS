@@ -104,6 +104,7 @@ Route::get('/students/{id}/edit', [StudentController::class, 'edit'])->name('stu
 Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
 Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
 
+
 //connect
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -127,5 +128,21 @@ Route::get('/events', function () {
 
 use App\Models\Student;
 use App\Models\Grade;
+
+
+use App\Http\Controllers\EventController;
+
+Route::get('/students/event', [EventController::class, 'index']);
+
+
+use App\Http\Controllers\GradebookController;
+
+// Student Routes
+Route::middleware(['auth', 'role:student'])->prefix('students')->group(function () {
+    Route::get('/gradebook', [GradebookController::class, 'index'])->name('students.gradebook');
+    Route::get('/event', [EventController::class, 'index'])->name('students.event');
+    Route::get('/my-events', [EventController::class, 'myEvents'])->name('students.my-events');
+    Route::get('/subjects', [GradebookController::class, 'subjects'])->name('students.subjects');
+});
 
 
