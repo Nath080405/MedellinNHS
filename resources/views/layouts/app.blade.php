@@ -10,7 +10,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+<<<<<<< HEAD
         /* Put your common styles here (fixed sidebar, etc) */
+=======
+        body {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 1.5rem;
+            min-height: 100vh;
+        }
+        .container-fluid {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-link {
+            color: #000;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+>>>>>>> e73833c25723d978dd07959f19d9d492e50105fa
     </style>
 </head>
 <body>
@@ -23,6 +46,7 @@
                 <img src="{{ asset('images/logo (2).png') }}" alt="Logo" class="img-fluid" style="max-width: 60px;">
             </div>
 
+<<<<<<< HEAD
             <div class="d-flex flex-column mb-4">
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -50,6 +74,10 @@
 
         <!-- Main Content -->
         <div class="col-md-9 col-lg-10 p-4 main-content" style="background-color: #7FD8BE;">
+=======
+    <div class="main-content">
+        <div class="container-fluid">
+>>>>>>> e73833c25723d978dd07959f19d9d492e50105fa
             @yield('content')
         </div>
     </div>

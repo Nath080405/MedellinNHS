@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Grade;
 
 class User extends Authenticatable
 {
@@ -22,8 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
         'section',
-        'role'
+        // 'username'
     ];
 
     /**
@@ -47,11 +47,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-     /**
-     * Relationship: A teacher has many grades.
-     */
-    public function grades()
+
+    public function student()
     {
-        return $this->hasMany(Grade::class); // Assumes 'user_id' in grades table
+        return $this->hasOne(Student::class);
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'teacher_id');
     }
 }

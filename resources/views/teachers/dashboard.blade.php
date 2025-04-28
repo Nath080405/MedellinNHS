@@ -91,7 +91,10 @@
                         @endforeach
 
                         @if(empty($quickActions))
-                            <a href="{{ route('admin.students.create') }}" class="btn btn-primary shadow-sm">
+
+                            <!-- href="{{ route('students.create') }}" -->
+
+                            <a class="btn btn-primary shadow-sm">
                                 <i class="bi bi-person-plus me-2"></i>Add New Student
                             </a>
                             <a href="#" class="btn btn-outline-primary shadow-sm">
@@ -108,18 +111,29 @@
     </div>
 
     <style>
-        .card {
-            border-radius: 0.5rem;
-        }
-        .shadow-sm {
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-        }
         .avatar-sm {
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .avatar-sm i {
+            font-size: 1.1rem;
+        }
+
+        .card {
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .shadow-sm {
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
         }
     </style>
 @endsection
